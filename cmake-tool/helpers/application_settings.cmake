@@ -11,7 +11,10 @@ cmake_minimum_required(VERSION 3.8.2)
 include_guard(GLOBAL)
 
 function(ApplyData61ElfLoaderSettings kernel_platform kernel_sel4_arch)
-    set(binary_list "tx1;hikey;odroidc2;odroidc4;imx8mq-evk;imx8mm-evk;hifive;starfive;tqma8xqp1gb;bcm2711")
+    set(
+        binary_list
+        "tx1;hikey;odroidc2;odroidc4;imx8mq-evk;imx8mm-evk;hifive;starfive;tqma8xqp1gb;bcm2711;rocketchip"
+    )
     set(efi_list "tk1;rockpro64;quartz64")
     set(uimage_list "tx2;am335x")
     if(
@@ -160,6 +163,8 @@ function(correct_platform_strings)
         # and leave all further setup to the architecture/platform specific
         # configuration to <sel4 kernel>/src/plat/*/config.cmake
         #
+        "-KernelRiscVPlatform"
+        "rocketchip:rocketchip-base,rocketchip-zcu102"
         "-KernelARMPlatform"
         "imx6:sabre,wandq,nitrogen6sx"
         "bcm2837:rpi3"
